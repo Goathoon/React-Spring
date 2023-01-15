@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ProjController {
 
-    @GetMapping("/")
+    @GetMapping("/example")
     public Goathoon doApi(){
         Goathoon goathoon = new Goathoon();
         goathoon.setName("Taehoon");

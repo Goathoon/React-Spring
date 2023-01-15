@@ -3,15 +3,14 @@ import './App.css';
 import {useEffect, useState} from "react";
 
 function App() {
-    const [message, setMessage] = useState("");
+    const [message, setMessage] = useState([]);
 
     useEffect(() => {
-        fetch("/")
-            .then((response) => {
-                return response.text()
-            })
-            .then(function (data) {
-                setMessage(data);
+        fetch("/example")
+            .then(response => response.json())
+            .then(data => {
+            console.log(data);
+            setMessage(data["name"]);
             });
     }, []);
 
