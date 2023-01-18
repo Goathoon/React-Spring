@@ -1,38 +1,25 @@
-import logo from './logo.svg';
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import {useEffect, useState} from "react";
+import PostListPage from './pages/PostListPage';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import WritePage from './pages/WritePage';
+import PostPage from './pages/PostPage';
 
 function App() {
-    const [message, setMessage] = useState([]);
-
-    useEffect(() => {
-        fetch("/example")
-            .then(response => response.json())
-            .then(data => {
-            console.log(data);
-            setMessage(data["name"]);
-            });
-    }, []);
-
-    return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo"/>
-                <p>
-                    Edit <code>src/App.js</code> and save to reload.
-                </p>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Learn React
-                </a>
-                JSON to text : {message}
-            </header>
-        </div>
-    );
+  return (
+    <>
+    <Routes>
+      <Route element = {<PostListPage/>} path="/:username" exact/>
+      <Route element = {<PostListPage/>} path="/" exact/>
+      <Route element = {<LoginPage/>} path="/login"/>
+      <Route element = {<RegisterPage/>} path ="/register"/>
+      <Route element = {<WritePage/>} path = "/write"/>
+      <Route element = {<PostPage/>} path = "/:username/:postId"/>
+    </Routes>
+    </>
+  );
 }
 
 export default App;
