@@ -4,6 +4,7 @@ import com.example.SpringAndReact.Domain.Member;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class MemoryMemberRepository implements MemberRepository {
     private static Map<Long,Member> store = new HashMap<>();
@@ -14,5 +15,10 @@ public class MemoryMemberRepository implements MemberRepository {
         member.setId(++sequence);
         store.put(member.getId(), member);
         return member;
+    }
+
+    @Override
+    public Optional<Member> findByUserId(String id) {
+        return store.values().stream().filter(member->member.getUserId().equals(id)).findAny();
     }
 }
