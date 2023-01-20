@@ -4,11 +4,12 @@ import com.example.SpringAndReact.Domain.Member;
 import com.example.SpringAndReact.Service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api/auth/register")
+@RequestMapping("api/auth")
 public class MemberController {
     private final MemberService memberService;
 
@@ -17,13 +18,14 @@ public class MemberController {
         this.memberService = memberService;
     }
 
-    @PostMapping("/api/auth/register")
-    public String createForm(MemberForm form){
+    @PostMapping("/register")
+    public String createForm(@RequestBody MemberForm form){
         Member member = new Member();
-        member.setUserId(form.getUserId());
-        member.setPassword(form.getPassword());
-        memberService.join(member);
+        System.out.println(form.getUserId());
+//        member.setUserId(form.getUserId());
+//        member.setPassword(form.getPassword());
+//        memberService.join(member);
 
-        return "redirect:/";
+        return "login";
     }
 };
