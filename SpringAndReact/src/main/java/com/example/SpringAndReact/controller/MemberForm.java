@@ -1,15 +1,15 @@
 package com.example.SpringAndReact.controller;
 
 public class MemberForm {
-    private String UserId;
+    private String username;
     private String password;
 
-    public String getUserId() {
-        return UserId;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserId(String userId) {
-        UserId = userId;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {

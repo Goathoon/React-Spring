@@ -21,10 +21,11 @@ public class MemberController {
     @PostMapping("/register")
     public String createForm(@RequestBody MemberForm form){
         Member member = new Member();
-        System.out.println(form.getUserId());
-//        member.setUserId(form.getUserId());
-//        member.setPassword(form.getPassword());
-//        memberService.join(member);
+        member.setUsername(form.getUsername());
+        member.setPassword(form.getPassword());
+        System.out.println(member.getUsername());
+        System.out.println(member.getPassword());
+        memberService.join(member);
 
         return "login";
     }

@@ -2,7 +2,7 @@ package com.example.SpringAndReact.Domain;
 
 public class Member {
     private Long id;
-    private String userId;
+    private String username;
     private String password;
 
     public Long getId() {
@@ -13,12 +13,12 @@ public class Member {
         this.id = id;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
