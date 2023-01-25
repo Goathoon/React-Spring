@@ -1,8 +1,14 @@
 package com.example.SpringAndReact.Domain;
 
+import jakarta.persistence.*;
+
+@Entity
 public class Member {
+    @Id @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
+    @Column(name="username")
     private String username;
+    @Column(name="password")
     private String password;
 
     public Long getId() {
