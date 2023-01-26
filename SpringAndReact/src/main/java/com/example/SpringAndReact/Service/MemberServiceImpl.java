@@ -2,7 +2,9 @@ package com.example.SpringAndReact.Service;
 
 import com.example.SpringAndReact.Domain.Member;
 import com.example.SpringAndReact.Repository.MemberRepository;
+import jakarta.transaction.Transactional;
 
+@Transactional
 public class MemberServiceImpl implements MemberService{
     private final MemberRepository memberRepository;
     public MemberServiceImpl(MemberRepository memberRepository) {
