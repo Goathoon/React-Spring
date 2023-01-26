@@ -1,5 +1,6 @@
 package com.example.SpringAndReact;
 
+import com.example.SpringAndReact.Repository.JpaMemberRepository;
 import com.example.SpringAndReact.Repository.MemoryMemberRepository;
 import com.example.SpringAndReact.Service.MemberService;
 import com.example.SpringAndReact.Service.MemberServiceImpl;
@@ -20,7 +21,7 @@ public class AppConfig {
     }
     @Bean
     public MemberService memberService (){
-        return new MemberServiceImpl(new MemoryMemberRepository());
+        return new MemberServiceImpl(new JpaMemberRepository(em));
     }
 
 }
