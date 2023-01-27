@@ -6,13 +6,12 @@ import {check} from '../modules/user';
 
 const RegisterForm = () => {
   const dispatch = useDispatch(); //스토어에서 컨테이너 컴포넌트를 가져옴
-  const { form,auth,authError,user } = useSelector(({ auth,user }) => ({
+  
+  const { form,auth,authError } = useSelector(({ auth }) => ({
     form: auth.register,
     auth:auth.auth,
     authError:auth.authError,
-    user:user.user
   }));
-
   // 인풋 변경 이벤트 핸들러
   const onChange = (e) => {
     const { value, name } = e.target;
@@ -50,17 +49,17 @@ const RegisterForm = () => {
     if (auth){
       console.log('회원가입 성공');
       console.log(auth);
-      dispatch(check());
+      // dispatch(check());
     }
   },[auth,authError,dispatch]);
 
   //user잘 설정됨?
-  useEffect(()=>{
-    if (user){
-      console.log('check API 성공');
-      console.log(user);
-    }
-  },[user]);
+  // useEffect(()=>{
+  //   if (user){
+  //     console.log('check API 성공');
+  //     console.log(user);
+  //   }
+  // },[user]);
   
   return (
     <AuthForm
