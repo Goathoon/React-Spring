@@ -30,6 +30,10 @@ export const register = createAction(REGISTER, ({ username, password }) => ({
   username,
   password
 }));
+// username,password라는 payload가 담김 (회원가입하자마자)
+// 그 후에, saga를 통해 register_success 상태함수가 동작하면서 
+// 스프링에서 받아온 member객체가 auth에 들어가게됨.
+
 export const login = createAction(LOGIN, ({ username, password }) => ({
   username,
   password
@@ -72,7 +76,7 @@ const auth = handleActions(
     [REGISTER_SUCCESS]: (state, { payload: auth }) => ({
       ...state,
       authError: null,
-      auth
+      auth //스프링에서 쏜 member객체가 auth로 들어감
     }),
     // 회원가입 실패
     [REGISTER_FAILURE]: (state, { payload: error }) => ({
