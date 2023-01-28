@@ -12,10 +12,12 @@ const LoginForm = () => {
     dispatch(initializeForm('login'));
   }, [dispatch]);
 
-  const { form, auth, authError } = useSelector(({ auth }) => ({
+  const { form, auth, authError, isRegister, isLogin } = useSelector(({ auth }) => ({
     form: auth.login,
     auth: auth.auth,
-    authError: auth.authError
+    authError: auth.authError,
+    isRegister: auth.isRegister,
+    isLogin: auth.isLogin
   }));
   const navigate = useNavigate();
 
@@ -57,13 +59,13 @@ const LoginForm = () => {
       console.log(authError);
       return;
     }
-    if (auth) {
+    if (auth && isLogin) {
       window.alert('로그인 성공!');
       console.log('로그인 성공');
       console.log(auth);
       navigate("/write");
     }
-  }, [auth, authError]);
+  }, [auth, authError, isLogin]);
 
   return (
     <AuthForm

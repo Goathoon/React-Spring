@@ -54,7 +54,9 @@ const initialState = {
     password: ''
   },
   auth: null,
-  authError: null
+  authError: null,
+  isLogin: null,
+  isRegister: null
 };
 
 const auth = handleActions(
@@ -66,29 +68,39 @@ const auth = handleActions(
     [INITIALIZE_FORM]: (state, { payload: form }) => ({
       ...state,
       [form]: initialState[form],
-      authError: null // 폼 전환 시 회원 인증 에러 초기화
+      authError: null, // 폼 전환 시 회원 인증 에러 초기화
+      isLogin: null,
+      isRegister: null
     }),
     // 회원가입 성공
     [REGISTER_SUCCESS]: (state, { payload: auth }) => ({
       ...state,
       authError: null,
-      auth
+      auth,
+      isLogin: null,
+      isRegister: true
     }),
     // 회원가입 실패
     [REGISTER_FAILURE]: (state, { payload: error }) => ({
       ...state,
-      authError: error
+      authError: error,
+      isLogin: null,
+      isRegister: null
     }),
     // 로그인 성공
     [LOGIN_SUCCESS]: (state, { payload: auth }) => ({
       ...state,
       authError: null,
-      auth
+      auth,
+      isLogin: true,
+      isRegister: null
     }),
     // 로그인 실패
     [LOGIN_FAILURE]: (state, { payload: error }) => ({
       ...state,
-      authError: error
+      authError: error,
+      isLogin: null,
+      isRegister: null
     })
   },
   initialState
