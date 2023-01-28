@@ -1,13 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeField, initializeForm, register } from '../modules/auth';
+import { changeField, initializeForm, login } from '../modules/auth';
 import AuthForm from '../components/auth/AuthForm';
+import { useNavigate } from '../../node_modules/react-router-dom/dist/index';
 
 const LoginForm = () => {
   const dispatch = useDispatch();
-  const { form } = useSelector(({ auth }) => ({
+
+  //컴포넌트가 처음 렌더링될 때 form 을 초기화함
+  useEffect(() => {
+    dispatch(initializeForm('login'));
+  }, [dispatch]);
+
+  const { form, auth, authError } = useSelector(({ auth }) => ({
     form: auth.login,
+    auth: auth.auth,
+    authError: auth.authError
   }));
+  const navigate = useNavigate();
+
 
   // 인풋 변경 이벤트 핸들러
   const onChange = (e) => {
@@ -25,7 +36,34 @@ const LoginForm = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     //구현 예정
+    // 230124 siwon
+    const { username, password } = form;
+    if (username === '') {
+      window.alert('아이디를 입력하세요.');
+      return;
+    }
+    if (password === '') {
+      window.alert('패스워드를 입력하세요.');
+      return;
+    }
+    dispatch(login({ username, password }));
   };
+
+  // 로그인 성공/실패 처리
+  useEffect(() => {
+    if (authError) {
+      window.alert('아이디/비밀번호를 확인해주세요.');
+      console.log('오류 발생');
+      console.log(authError);
+      return;
+    }
+    if (auth) {
+      window.alert('로그인 성공!');
+      console.log('로그인 성공');
+      console.log(auth);
+      navigate("/write");
+    }
+  }, [auth, authError]);
 
   return (
     <AuthForm

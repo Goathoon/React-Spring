@@ -19,14 +19,27 @@ public class MemberController {
     }
 
     @PostMapping("/register")
-    public String createForm(@RequestBody MemberForm form){
+    public String createForm(@RequestBody MemberForm form) {
         Member member = new Member();
         member.setUsername(form.getUsername());
         member.setPassword(form.getPassword());
         System.out.println(member.getUsername());
         System.out.println(member.getPassword());
-        memberService.join(member);
+        // memberService.join(member);
 
-        return "login";
+        return "registered";
     }
+
+    @PostMapping("/login")
+    public String createLoginForm(@RequestBody MemberForm form) {
+        Member member = new Member();
+        member.setUsername(form.getUsername());
+        member.setPassword(form.getPassword());
+        System.out.println(member.getUsername());
+        System.out.println(member.getPassword());
+        // memberService.checkMemberPassword(member);
+
+        return "try login";
+    }
+
 };

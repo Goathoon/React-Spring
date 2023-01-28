@@ -2,8 +2,10 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeField, initializeForm, register } from '../modules/auth';
 import AuthForm from '../components/auth/AuthForm';
+import { useNavigate } from '../../node_modules/react-router-dom/dist/index';
 
 const RegisterForm = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch(); //스토어에서 컨테이너 컴포넌트를 가져옴
   const { form, auth, authError } = useSelector(({ auth }) => ({
     form: auth.register,
@@ -57,7 +59,7 @@ const RegisterForm = () => {
   //회원가입 성공/실패 처리
   useEffect(() => {
     if (authError) {
-      window.alert('회원가입 처리 도중 오류가 발생했습니다. 서버가 켜져있는지 확인해주세요.');
+      window.alert('이미 존재하는 아이디입니다.');
       console.log('오류 발생');
       console.log(authError);
       return;
@@ -66,8 +68,10 @@ const RegisterForm = () => {
       window.alert('환영합니다!');
       console.log('회원가입 성공');
       console.log(auth);
+      dispatch(initializeForm('register'));
+      navigate("/login");
     }
-  }, [auth, authError]);
+  }, [auth, authError, dispatch]);
 
   return (
     <AuthForm

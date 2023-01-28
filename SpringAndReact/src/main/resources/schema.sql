@@ -1,0 +1,8 @@
+DROP TABLE IF EXISTS MEMBER;
+
+CREATE TABLE MEMBER COMMENT '회원' (
+    MBR_ID           VARCHAR(10)     NOT NULL    COMMENT '고유ID'
+  , USER_ID          VARCHAR(100)                COMMENT '회원ID'
+  , USER_PASSWORD    VARCHAR(100)                COMMENT '비밀번호'
+  , PRIMARY KEY (MBR_ID)
+);

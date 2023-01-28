@@ -4,5 +4,8 @@ import com.example.SpringAndReact.Domain.Member;
 
 public interface MemberService {
     Long join(Member member);
+
     void validateDuplicateMember(Member member);
+
+    void checkMemberPassword(Member member);
 }
