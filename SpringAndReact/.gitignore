@@ -1,4 +1,6 @@
 HELP.md
+/src/main/resources/application.properties
+*.sql
 .gradle
 build/
 !gradle/wrapper/gradle-wrapper.jar

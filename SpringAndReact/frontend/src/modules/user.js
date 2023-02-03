@@ -1,3 +1,4 @@
+//해당 모듈 기능은 사용하지 않아보겠습니다.
 import { createAction, handleActions } from 'redux-actions';
 import { takeLatest } from 'redux-saga/effects';
 import * as authAPI from '../lib/api/auth';
@@ -16,10 +17,10 @@ export const check = createAction(CHECK, (username => ({
   username
 })));
 
-const checkSaga = createRequestSaga(CHECK, authAPI.check);
-export function* userSaga() {
-  yield takeLatest(CHECK, checkSaga);
-}
+// const checkSaga = createRequestSaga(CHECK, authAPI.check);
+// export function* userSaga() {
+//   yield takeLatest(CHECK, checkSaga);
+// }
 
 const initialState = {
   user: null,
