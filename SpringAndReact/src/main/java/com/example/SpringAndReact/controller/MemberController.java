@@ -18,12 +18,11 @@ public class MemberController {
 
     @PostMapping("/register")
     @ResponseBody
-    public Member createForm(@RequestBody MemberForm form){
+    public Member createForm(@RequestBody MemberForm form) {
         Member member = new Member();
         member.setUsername(form.getUsername());
         member.setPassword(form.getPassword());
         memberService.join(member);
         return member;
     }
-
 };

@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
+import {useNavigate} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeField, initializeForm, register } from '../modules/auth';
 import AuthForm from '../components/auth/AuthForm';
 import {check} from '../modules/user';
 
 const RegisterForm = () => {
+  const navigate= useNavigate();
   const dispatch = useDispatch(); //스토어에서 컨테이너 컴포넌트를 가져옴
   
   const { form,auth,authError,user } = useSelector(({auth,user})=> ({
@@ -49,19 +51,21 @@ const RegisterForm = () => {
       return;
     }
     if (auth){
+      window.alert('회원가입 성공!');
       console.log('회원가입 성공');
       console.log(auth);
-      dispatch(check());
+      navigate('/login');
+      // dispatch(check());
     }
   },[auth,authError,dispatch]);
 
   //user잘 설정됨?
-  useEffect(()=>{
-    if (user){
-      console.log('check API 성공');
-      console.log(user);
-    }
-  },[user]);
+  // useEffect(()=>{
+  //   if (user){
+  //     console.log('check API 성공');
+  //     console.log(user);
+  //   }
+  // },[user]);
   
   return (
     <AuthForm
