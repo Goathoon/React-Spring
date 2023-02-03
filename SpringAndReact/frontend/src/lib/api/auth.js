@@ -9,9 +9,5 @@ export const register = ({ username, password }) =>
 
 
 //로그인 상태 확인
-<<<<<<< HEAD
-export const check = () => client.get('/api/auth/register'); //register로 다시 get
-=======
-export const check = () => client.get('/api/auth/check');
->>>>>>> 217c858a9a151d4a69cf6b268c6f82fb054cbe6a
+// export const check = () => client.get('/api/auth/check');
 
