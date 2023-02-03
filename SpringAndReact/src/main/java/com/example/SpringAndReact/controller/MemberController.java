@@ -35,7 +35,8 @@ public class MemberController {
         member.setPassword(form.getPassword());
         java.util.Optional<Member> result = memberService.checkIdPassword(member);
         if (!result.isPresent()){
-    
+            return null;
         }
+        return member;
     }
 };
