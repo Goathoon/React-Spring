@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("api/auth")
+//@RequestMapping("api/auth")
 public class MemberController {
     private final MemberService memberService;
 
@@ -21,7 +21,7 @@ public class MemberController {
         this.memberService = memberService;
     }
 
-    @PostMapping("/register")
+    @PostMapping("api/auth/register")
     @ResponseBody
     public Member createForm(@RequestBody MemberForm form) {
         Member member = new Member();
@@ -30,7 +30,7 @@ public class MemberController {
         memberService.join(member);
         return member;
     }
-    @PostMapping("/login")
+    @PostMapping("api/auth/login")
     @ResponseBody // Login이 확인되었는지 Front에서 알게하기 위해 Member 객체를 payload로 넘겨주기 위함이다.
     public <Optional> Member login(@RequestBody MemberForm form, HttpServletRequest request){
         Member member = new Member();

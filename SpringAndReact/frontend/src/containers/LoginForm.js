@@ -9,7 +9,7 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
-  const { form, auth, authError} = useSelector(({ auth }) => ({
+  const { form, auth, authError } = useSelector(({ auth }) => ({
     form: auth.login,
     auth: auth.auth,
     authError: auth.authError,
@@ -31,7 +31,7 @@ const LoginForm = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     const { username, password } = form;
-    dispatch(login({ username, password })); 
+    dispatch(login({ username, password }));
   };
 
   // 컴포넌트가 처음 렌더링 될 때 form 을 초기화함
@@ -49,8 +49,8 @@ const LoginForm = () => {
     if (auth) {
       window.alert('로그인 성공!');
       console.log('로그인 성공');
-      navigate('/');
-      console.log(form);
+      // navigate('/');
+      console.log(auth);
       try {
         localStorage.setItem('auth', JSON.stringify(auth));
       } catch (e) {
