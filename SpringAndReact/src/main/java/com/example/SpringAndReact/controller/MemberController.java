@@ -43,6 +43,7 @@ public class MemberController {
         HttpSession session = request.getSession(); //세션이 있으면 세션 반환, 없으면 신규 세션 생성
         //세션에 로그인 회원 정보 보관
         session.setAttribute("LOGIN_MEMBER", member);
+
         return member;
     }
 
