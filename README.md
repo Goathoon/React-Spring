@@ -2,6 +2,12 @@
 
  [블로그] (https://velog.io/@goat_hoon)
  
+ 참고) yarn start -> 
+ "start": "set NODE_OPTIONS=--openssl-legacy-provider && react-scripts start", 
+ "start": "react-scripts start",
+ 둘 중 하나로 바꿔줄 것
+ 
+ <hr/>
  ## 1주차.
  회원가입 API 구현
  
