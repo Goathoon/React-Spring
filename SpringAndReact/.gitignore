@@ -1,8 +1,8 @@
 HELP.md
-/src/main/resources/application.properties
-/src/main/resources/frontend/.prettierrc
-/src/main/resources/frontend/jsconfig.json
-/src/main/resources/frontend/node_modules/
+/src/main/resources/templates/application.properties
+/src/main/resources/templates/frontend/.prettierrc
+/src/main/resources/templates/frontend/jsconfig.json
+/src/main/resources/templates/frontend/node_modules/
 *.sql
 .gradle
 build/

@@ -50,10 +50,11 @@ public class MemberController {
     // 서블릿 HTTP 세션 사용
     @GetMapping("/")
     public String homeLoginV3(HttpServletRequest request, Model model) {
+        System.out.println("coming?");
         // getSession(true) 를 사용하면 처음 들어온 사용자도 세션이 만들어지기 때문에 false로 받음
         HttpSession session = request.getSession(false);
         if (session == null) {
-            return "/login";
+            return "index.html";
         }
 
         // Member 로 타입 캐스팅
@@ -61,11 +62,11 @@ public class MemberController {
 
         // 세션에 회원 데이터가 없으면 home
         if (loginMember == null) {
-            return "/login";
+            return "index.html";
         }
 
         // 세션이 유지되면 로그인으로 이동
         model.addAttribute("member", loginMember);
-        return "/write";
+        return "index.html";
     }
 };
