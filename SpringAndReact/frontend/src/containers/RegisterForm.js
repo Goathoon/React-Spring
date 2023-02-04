@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { changeField, initializeForm, register } from '../modules/auth';
 import AuthForm from '../components/auth/AuthForm';
 
-const RegisterForm = ({history}) => {
+const RegisterForm = () => {
   const navigate= useNavigate();
   const dispatch = useDispatch(); //스토어에서 컨테이너 컴포넌트를 가져옴
 
@@ -18,7 +18,6 @@ const RegisterForm = ({history}) => {
   // 인풋 변경 이벤트 핸들러
   const onChange = (e) => {
     const { value, name } = e.target;
-    console.log(value, name);
     dispatch(
       changeField({
         form: 'register',
@@ -54,6 +53,7 @@ const RegisterForm = ({history}) => {
     if (auth){
       window.alert('회원가입 성공!');
       console.log('회원가입 성공');
+      dispatch(initializeForm('register'));
       console.log(auth);
       navigate('/login');
       // dispatch(check());

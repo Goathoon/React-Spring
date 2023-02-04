@@ -31,12 +31,12 @@ const LoginForm = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     const { username, password } = form;
-    dispatch(login({ username, password }));
+    dispatch(login({ username, password })); 
   };
 
   // 컴포넌트가 처음 렌더링 될 때 form 을 초기화함
   useEffect(() => {
-    dispatch(initializeForm('login'));
+    dispatch(initializeForm('login')); //initializeform이 작동을 하나?
   }, [dispatch]);
 
   useEffect(() => {
@@ -50,6 +50,7 @@ const LoginForm = () => {
       window.alert('로그인 성공!');
       console.log('로그인 성공');
       navigate('/');
+      console.log(form);
       try {
         localStorage.setItem('auth', JSON.stringify(auth));
       } catch (e) {
