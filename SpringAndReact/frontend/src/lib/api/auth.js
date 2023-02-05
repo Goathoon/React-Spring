@@ -6,7 +6,8 @@ export const login = ({ username, password }) =>
 //회원 가입
 export const register = ({ username, password }) =>
     client.post('/api/auth/register', { username, password });
-
+    
+export const logout = () => client.post('api/auth/logout');
 
 //로그인 상태 확인
 // export const check = () => client.get('/api/auth/register'); //register로 다시 get

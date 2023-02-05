@@ -1,10 +1,11 @@
 import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
-import { takeLatest } from 'redux-saga/effects';
+import { takeLatest,call } from 'redux-saga/effects';
 import createRequestSaga, {
   createRequestActionTypes
 } from '../lib/createRequestSaga';
 import * as authAPI from '../lib/api/auth';
+import { useCallback } from 'react';
 
 const CHANGE_FIELD = 'auth/CHANGE_FIELD';
 const INITIALIZE_FORM = 'auth/INITIALIZE_FORM';
@@ -16,7 +17,15 @@ const [REGISTER, REGISTER_SUCCESS, REGISTER_FAILURE] = createRequestActionTypes(
 const [LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE] = createRequestActionTypes(
   'auth/LOGIN'
 );
-
+const LOGOUT = 'user/LOGOUT';
+function *logoutSaga(){
+  try{
+    yield call(authAPI.logout); //logout API 호출
+    localStorage.removeItem('user');
+  }catch (e){
+    console.log(e);
+  }
+}
 export const changeField = createAction(
   CHANGE_FIELD,
   ({ form, key, value }) => ({
@@ -38,6 +47,7 @@ export const login = createAction(LOGIN, ({ username, password }) => ({
   password
 }));
 
+export const logout = createAction(LOGOUT);
 // saga 생성
 const registerSaga = createRequestSaga(REGISTER, authAPI.register);
 
@@ -50,6 +60,7 @@ const loginSaga = createRequestSaga(LOGIN, authAPI.login);
 export function* authSaga() {
   yield takeLatest(REGISTER, registerSaga);
   yield takeLatest(LOGIN, loginSaga);
+  yield takeLatest(LOGOUT,logoutSaga);
 }
 
 const initialState = {
@@ -77,6 +88,10 @@ const auth = handleActions(// createAction생성시, 인자가 존재하면 payl
       [form]: initialState[form],
       auth:null, //이렇게 정의해야 로그인화면으로 넘어가지 않는다!!
       authError: null // 폼 전환 시 회원 인증 에러 초기화
+    }),
+    [LOGOUT]: state=> ({
+      ...state,
+      user:null,
     }),
     // 회원가입 성공
     [REGISTER_SUCCESS]: (state, { payload: auth }) => ({ //saga에서 정의한 register임 따라서 payload는 saga내 비동기 함수 response.data로 들어감.(api 결과)
