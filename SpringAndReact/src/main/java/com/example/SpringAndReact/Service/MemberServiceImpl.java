@@ -17,6 +17,20 @@ public class MemberServiceImpl implements MemberService {
         return member.getId(); // 고유 id 반환
     }
 
+    // 230206 siwon
+    public boolean remove(Member member) {
+        memberRepository.removeMember(member);
+        return true;
+    }
+
+    public void logout(Member member) {
+        memberRepository.logoutMember(member);
+    }
+
+    public void login(Member member) {
+        memberRepository.loginMember(member);
+    }
+
     @Override
     public void validateDuplicateMember(Member member) {
         memberRepository.findByUserId(member.getUsername()).ifPresent(mem -> {
@@ -35,6 +49,17 @@ public class MemberServiceImpl implements MemberService {
         if (memberRepository.checkUserIDPassword(member.getUsername(), member.getPassword()).isEmpty()) {
             try {
                 throw new IllegalAccessException("비밀번호가 틀렸습니다.");
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    @Override
+    public void isMemberLogin(Member member) {
+        if (memberRepository.checkMemberLogin(member.getUsername()).isEmpty()) {
+            try {
+                throw new IllegalAccessException("로그인 하지 않은 회원입니다.");
             } catch (IllegalAccessException e) {
                 throw new RuntimeException(e);
             }

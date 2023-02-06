@@ -8,4 +8,10 @@ public interface MemberService {
     void validateDuplicateMember(Member member);
 
     void checkMemberPassword(Member member);
+
+    void isMemberLogin(Member member);
+
+    void logout(Member member);
+
+    void login(Member member);
 }

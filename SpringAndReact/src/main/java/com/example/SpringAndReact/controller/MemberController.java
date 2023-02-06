@@ -25,7 +25,7 @@ public class MemberController {
         member.setPassword(form.getPassword());
         System.out.println(member.getUsername());
         System.out.println(member.getPassword());
-        // memberService.join(member);
+        memberService.join(member);
 
         return "registered";
     }
@@ -35,11 +35,23 @@ public class MemberController {
         Member member = new Member();
         member.setUsername(form.getUsername());
         member.setPassword(form.getPassword());
+        memberService.checkMemberPassword(member);
+        memberService.login(member);
         System.out.println(member.getUsername());
         System.out.println(member.getPassword());
-        // memberService.checkMemberPassword(member);
-
+        System.out.println(member.getLogin());
         return "try login";
+    }
+
+    @PostMapping("/logout")
+    public String createLogoutForm(@RequestBody MemberForm form) {
+        Member member = new Member();
+        member.setUsername(form.getUsername());
+        System.out.println(member.getUsername());
+        memberService.isMemberLogin(member);
+        memberService.logout(member);
+        System.out.println(member.getLogin());
+        return "try logout";
     }
 
 };

@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeField, initializeForm, login } from '../modules/auth';
+import { changeField, initializeForm, logout } from '../modules/auth';
 import AuthForm from '../components/auth/AuthForm';
 import { useNavigate } from '../../node_modules/react-router-dom/dist/index';
 
-const LoginForm = () => {
+const LogoutForm = () => {
   const dispatch = useDispatch();
 
   //컴포넌트가 처음 렌더링될 때 form 을 초기화함
   useEffect(() => {
-    dispatch(initializeForm('login'));
+    dispatch(initializeForm('logout'));
   }, [dispatch]);
 
   const { form, auth, authError, isRegister, isLogin } = useSelector(({ auth }) => ({
-    form: auth.login,
+    form: auth.logout,
     auth: auth.auth,
     authError: auth.authError,
     isRegister: auth.isRegister,
@@ -25,31 +25,26 @@ const LoginForm = () => {
   // 인풋 변경 이벤트 핸들러
   const onChange = (e) => {
     const { value, name } = e.target;
-    console.log(value)
     dispatch(
       changeField({
-        form: 'login',
+        form: 'logout',
         key: name,
         value,
       }),
     );
+    // console.log(form, name, value)
   };
 
   // 폼 등록 이벤트 핸들러
   const onSubmit = (e) => {
     e.preventDefault();
-    //구현 예정
     // 230124 siwon
-    const { username, password } = form;
+    const { username } = form;
     if (username === '') {
       window.alert('아이디를 입력하세요.');
       return;
     }
-    if (password === '') {
-      window.alert('패스워드를 입력하세요.');
-      return;
-    }
-    dispatch(login({ username, password }));
+    dispatch(logout({ username }));
   };
 
   // 로그인 성공/실패 처리
@@ -60,17 +55,17 @@ const LoginForm = () => {
       console.log(authError);
       return;
     }
-    if (auth && isLogin) {
-      window.alert('로그인 성공!');
-      console.log('로그인 성공');
+    if (auth && !isLogin) {
+      window.alert('로그아웃 성공!');
+      console.log('로그아웃 성공');
       console.log(auth);
-      navigate("/write");
+      navigate("/login");
     }
   }, [auth, authError, isLogin]);
 
   return (
     <AuthForm
-      type="login"
+      type="logout"
       form={form}
       onChange={onChange}
       onSubmit={onSubmit}
@@ -78,4 +73,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default LogoutForm;

@@ -4,6 +4,7 @@ public class Member {
     private Long id;
     private String username;
     private String password;
+    private Boolean isLogin;
 
     public Long getId() {
         return id;
@@ -28,4 +29,13 @@ public class Member {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public Boolean getLogin() {
+        return isLogin;
+    }
+
+    public void setLogin(Boolean isLogin) {
+        this.isLogin = isLogin;
+    }
+
 }

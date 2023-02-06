@@ -56,7 +56,8 @@ const ButtonWithMarginTop = styled(Button)`
 
 const textMap = {
   login: '로그인',
-  register: '회원가입'
+  register: '회원가입',
+  logout: '환영합니다!'
 };
 
 /**
@@ -69,27 +70,31 @@ const ErrorMessage = styled.div`
   margin-top: 1rem;
 `;
 
-const AuthForm = ({ type, form, onChange, onSubmit}) => {
+const AuthForm = ({ type, form, onChange, onSubmit }) => {
   const text = textMap[type];
   return (
     <AuthFormBlock>
-      <h3>{text}</h3>
+      <h3 align='center'>{text}</h3>
       <form onSubmit={onSubmit}>
-        <StyledInput
-          autoComplete="username"
-          name="username"
-          placeholder="아이디"
-          onChange={onChange}
-          value={form.username}
-        />
-        <StyledInput
-          autoComplete="new-password"
-          name="password"
-          placeholder="비밀번호"
-          type="password"
-          onChange={onChange}
-          value={form.password}
-        />
+        {type !== 'logout' && (
+          <StyledInput
+            autoComplete="username"
+            name="username"
+            placeholder="아이디"
+            onChange={onChange}
+            value={form.username}
+          />
+        )}
+        {type !== 'logout' && (
+          <StyledInput
+            autoComplete="new-password"
+            name="password"
+            placeholder="비밀번호"
+            type="password"
+            onChange={onChange}
+            value={form.password}
+          />
+        )}
         {type === 'register' && (
           <StyledInput
             autoComplete="new-password"
@@ -100,14 +105,25 @@ const AuthForm = ({ type, form, onChange, onSubmit}) => {
             value={form.passwordConfirm}
           />
         )}
+        {type === 'logout' && (
+          <StyledInput
+            autoComplete="username"
+            name="username"
+            placeholder="로그아웃할 유저명을 입력하세요."
+            type="username"
+            onChange={onChange}
+            value={form.username}
+          />
+        )}
         <ButtonWithMarginTop cyan fullWidth style={{ marginTop: '1rem' }}>
           {text}
         </ButtonWithMarginTop>
       </form>
       <Footer>
-        {type === 'login' ? (
+        {type === 'login' && (
           <Link to="/register">회원가입</Link>
-        ) : (
+        )}
+        {type === 'register' && (
           <Link to="/login">로그인</Link>
         )}
       </Footer>
