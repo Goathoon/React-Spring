@@ -42,7 +42,7 @@ const UserInfo = styled.div`
   margin-right: 1rem;
 `;
 
-const Header = ({ user, onLogout }) => {
+const Header = ({ auth, onLogout }) => {
   return (
     <>
       <HeaderBlock>
@@ -50,9 +50,9 @@ const Header = ({ user, onLogout }) => {
           <Link to="/" className="logo">
             REACTERS
           </Link>
-          {user ? (
+          {auth ? (
             <div className="right">
-              <UserInfo>{user.username}</UserInfo>
+              <UserInfo>{auth.username}</UserInfo>
               <Button onClick={onLogout}>로그아웃</Button>
             </div>
           ) : (
@@ -66,5 +66,30 @@ const Header = ({ user, onLogout }) => {
     </>
   );
 };
+
+// const Header = ({ auth }) => {
+//   return (
+//     <>
+//       <HeaderBlock>
+//         <Wrapper>
+//           <Link to="/" className="logo">
+//             REACTERS
+//           </Link>
+//           {auth ? (
+//             <div className="right">
+//               <UserInfo>{auth.username}</UserInfo>
+//               <Button>로그아웃</Button>
+//             </div>
+//           ) : (
+//             <div className="right">
+//               <Button to="/login">로그인</Button>
+//             </div>
+//           )}
+//         </Wrapper>
+//       </HeaderBlock>
+//       <Spacer />
+//     </>
+//   );
+// };
 
 export default Header;

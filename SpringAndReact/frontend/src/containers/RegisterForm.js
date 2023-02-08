@@ -70,6 +70,11 @@ const RegisterForm = () => {
       window.alert('회원가입 성공!');
       console.log('회원가입 성공');
       dispatch(initializeForm('register'));
+      try {
+        localStorage.setItem('auth',JSON.stringify(auth));
+      } catch (e) {
+        console.log('localStorage is not working');
+      }
       console.log(auth);
       navigate('/login');
       // dispatch(check());
