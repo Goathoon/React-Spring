@@ -2,6 +2,8 @@ package com.example.SpringAndReact.Domain;
 
 import jakarta.persistence.*;
 
+
+
 @Entity
 public class Member {
     @Id @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -10,6 +12,9 @@ public class Member {
     private String username;
     @Column(name="password")
     private String password;
+    @Enumerated(EnumType.STRING)
+    private Authority authority;
+
 
     public Long getId() {
         return id;
@@ -34,4 +39,14 @@ public class Member {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public void setAuthority(Authority authority){
+        this.authority = authority;
+    }
+
+    public void getAuthority(){
+        this.authority = authority;
+    }
 }
+
+;

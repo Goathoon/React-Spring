@@ -49,7 +49,6 @@ const LoginForm = () => {
     if (auth) {
       window.alert('로그인 성공!');
       console.log('로그인 성공');
-      
       console.log(auth);
       try {
         localStorage.setItem('auth', JSON.stringify(auth));
